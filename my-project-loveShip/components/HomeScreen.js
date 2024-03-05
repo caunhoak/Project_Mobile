@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import axios from 'axios';
-import HomeScreen from './components/HomeScreen';
+import { getAllUsers, createUser } from '../api/usersApi';
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -12,10 +11,25 @@ export default function App() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/users');
-      setUsers(response.data);
+      const data = await getAllUsers();
+      setUsers(data);
     } catch (error) {
       console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleCreateUser = async () => {
+    try {
+      const newUser = await createUser({
+        username: 'example',
+        password: 'example',
+        email: 'example@example.com',
+        phone: '123456789'
+      });
+      console.log('New user created:', newUser);
+      // Update state or perform any other action
+    } catch (error) {
+      console.error('Error creating user:', error);
     }
   };
 
@@ -29,7 +43,7 @@ export default function App() {
           <Text>{item.username}</Text>
         )}
       />
-      <HomeScreen />
+      <Button title="Create User" onPress={handleCreateUser} />
     </View>
   );
 }
