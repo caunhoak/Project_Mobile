@@ -35,17 +35,6 @@ export const updateUser = async (userId, userData) => {
   }
 };
 
-// Xóa một người dùng
-// export const deleteUser = async (userId) => {
-//   try {
-//     const response = await axios.delete(`${BASE_URL}/${userId}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error deleting user:', error.message);
-//     throw error;
-//   }
-// };
-
 export const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(BASE_URL, {
