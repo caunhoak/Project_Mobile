@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
 import axios from 'axios';
 import HomeScreen from './components/HomeScreen';
+import OrderScreen from './components/OrderScreen';
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -21,7 +22,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Users:</Text>
+      {/* <Text>Users:</Text>
       <FlatList
         data={users}
         keyExtractor={(item) => item._id}
@@ -29,7 +30,8 @@ export default function App() {
           <Text>{item.username}</Text>
         )}
       />
-      <HomeScreen />
+      <HomeScreen /> */}
+      <OrderScreen />
     </View>
   );
 }

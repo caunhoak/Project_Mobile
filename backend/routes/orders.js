@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Order = require('../models/Order');
+const Order = require('../models/order');
 
 // Get all orders
 router.get('/', async (req, res) => {
@@ -14,12 +14,13 @@ router.get('/', async (req, res) => {
 
 // Create a new order
 router.post('/', async (req, res) => {
+    const { user, restaurant, items, totalPrice, status } = req.body;
     const order = new Order({
-        userId: req.body.userId,
-        items: req.body.items,
-        totalPrice: req.body.totalPrice,
-        status: req.body.status,
-        notes: req.body.notes
+        user,
+        restaurant,
+        items,
+        totalPrice,
+        status
     });
     try {
         const newOrder = await order.save();

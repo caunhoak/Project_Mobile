@@ -1,17 +1,26 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    userId: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
+        ref: 'User',
+        required: true
+    },
+    restaurant: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Restaurant',
+        required: true
     },
     items: [{
-        itemId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Item'
+        name: {
+            type: String,
+            required: true
         },
         quantity: {
+            type: Number,
+            required: true
+        },
+        price: {
             type: Number,
             required: true
         }
@@ -22,10 +31,8 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true
-    },
-    notes: {
-        type: String
+        enum: ['pending', 'confirmed', 'delivering', 'delivered'],
+        default: 'pending'
     },
     createdAt: {
         type: Date,
